@@ -1,0 +1,33 @@
+inFH = open("resources/plainMessage.txt","r")
+outFH = open("resources/encodedMessage.bin","wb")
+
+while True :
+  inChar = inFH.read(1)
+  if inChar == "" :
+    break
+
+  # To Convert Text to ASCII
+  asciiNum = ord(inChar)
+
+  # Code the ASCII Number using a simple function
+  codeNum = asciiNum * 5
+
+  # To Convert ASCII to Bytes
+  byteNum = (codeNum).to_bytes(2, byteorder='big')
+
+  # Write value to Binary Fila
+  outFH.write(byteNum)
+
+  # To Convert Bytes back to ASCII
+  newCode = int.from_bytes(byteNum, byteorder='big')
+  
+  # De-Code the ASCII Number using a reverse function
+  newAscii = int(newCode / 5)
+
+  # To Convert ASCII back to text
+  newChar = chr(newAscii)
+
+  print("Char: ",inChar," ASCII: ", asciiNum,"Coded: ",codeNum," Bytes: ",byteNum, " ASCII: ",newAscii," Char: ", newChar)
+
+outFH.close()
+
